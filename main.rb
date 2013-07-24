@@ -36,6 +36,7 @@ helpers do
 
   def card_image(card)
     '<img class="img-polaroid" src="/images/cards/#{card[1]}_#{card[0]}.jpg" />'
+    .downcase
   end
 
   def play_again?
