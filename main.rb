@@ -35,7 +35,7 @@ helpers do
   end
 
   def card_image(card)
-    "<img class='img-polaroid' src='/images/cards/#{card[1]}_#{card[0]}.jpg' />"
+    '<img class="img-polaroid" src="/images/cards/#{card[1]}_#{card[0]}.jpg" />'
   end
 
   def play_again?
