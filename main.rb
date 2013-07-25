@@ -76,6 +76,8 @@ get "/bet" do
   if session[:bankroll] == 0
     @error = "Nice try... You're out of money.<br />
     Time to <a href='/new_player'>start a new game</a>?"
+
+    halt erb(:bet)
   end
 
   session[:bet] = nil
@@ -83,7 +85,11 @@ get "/bet" do
 end
 
 post "/bet" do
-  if params[:amount].nil? || params[:amount].to_i == 0
+  if session[:bankroll] == 0
+    @error = "I said: YOU'RE OUT OF MONEY.<br />
+    It's time to <a href='/new_player'>start a new game</a>."
+    halt erb(:bet)
+  elsif params[:amount].nil? || params[:amount].to_i == 0
     @error = "Please make a bet."
     halt erb(:bet)
   elsif params[:amount].to_i > session[:bankroll]
@@ -125,7 +131,7 @@ post "/game/player/hit" do
     @show_hit_or_stay_buttons = false
   end
 
-  erb :game
+  erb :game, layout: false
 end
 
 get "/game/dealer" do
